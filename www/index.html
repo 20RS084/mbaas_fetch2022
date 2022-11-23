@@ -20,16 +20,7 @@
                 btnAClick(e);
             })
         })
-        //var TestClass=ncmb.DataStore("FetchTest");//クラスの指定
-        function fetch() {
-            var TestClass = ncmb.DataStore("FetchTest");
-            TestClass.fetch()
-            .then(function(results){//.thenで成功時の処理を記述
-            var data=results.get("text");
-            var update=results.get("updateDate");
-            $("#message").html(data + ":" + update);
-            });
-        };
+        
         function register() {
             // 登録するレコードを用意
             let testRecord = new TestClass();
@@ -46,6 +37,15 @@
                     $("#message").html("Failed to create new object, with error code: " + JSON.stringify(err));
                 })
         }
+        function fetch() {
+            var TestClass = ncmb.DataStore("FetchTest");
+            TestClass.fetch()
+            .then(function(results){//.thenで成功時の処理を記述
+            var data=results.get("text");
+            var update=results.get("updateDate");
+            $("#message").html(data + ":" + update);
+            });
+        };
     </script>
 </head>
 
