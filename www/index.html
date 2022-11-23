@@ -14,11 +14,22 @@
         let ncmb = new NCMB(appKey, clientKey);
         // 利用するデータベースを指定（存在しなければ生成）
         let TestClass = ncmb.DataStore("FetchTest");
+        
         $(function(){
             $("#btnA").click(function(e){
                 btnAClick(e);
             })
         })
+        //var TestClass=ncmb.DataStore("FetchTest");//クラスの指定
+        function fetch() {
+            var TestClass = ncmb.DataStore("FetchTest");
+            TestClass.fetch()
+            .then(function(results){//.thenで成功時の処理を記述
+            var data=results.get("text");
+            var update=results.get("updateDate");
+            $("#message").html(data + ":" + update);
+            });
+        };
         function register() {
             // 登録するレコードを用意
             let testRecord = new TestClass();
@@ -45,7 +56,7 @@
         <input id="value" type="text" value="Goodbye, mBaaS!">
     </div>
     <div id="button">
-        <button id="btnA" class="btn" onclick="btnAClick()">Register</button>
+        <button id="btnA" class="btn" onclick="register()">Register</button>
         <button id="btnB" class="btn" onclick="fetch()">Fetch</button>
     </div>
     <div id="message">message area</div>
